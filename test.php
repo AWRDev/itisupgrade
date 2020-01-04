@@ -19,3 +19,8 @@ $ex_url = explode('/', $_POST['url']);
         var_dump($ex_url);
 //echo getURLType($_POST['url']);
 ?>
+
+select id, sum(par) as par from t group by id 
+having sum(par) >= ALL(
+select sum(par) from t group by id
+);

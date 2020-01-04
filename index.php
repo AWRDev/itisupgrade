@@ -139,6 +139,9 @@ foreach($LL as $value){
     if($value->type=='scrolling'){
         $action_time=$value->date.' '.$value->time;
         $country=getCountryNameByIP($value->ip);
+        if($country==''){
+            $country = 'Unknown';
+        }
         $url = new URL_String($value->url);
         $sitename = $url->domain_name;
         $category = $url->category;
