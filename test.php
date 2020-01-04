@@ -15,5 +15,7 @@ function getURLType($url){
         return 'Scrolling';
     }
 }
-echo getURLType($_POST['url']);
+$ex_url = explode('/', $_POST['url']);
+        var_dump($ex_url);
+//echo getURLType($_POST['url']);
 ?>
