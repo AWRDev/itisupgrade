@@ -1,5 +1,3 @@
-<?php
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,41 +11,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- JQuery attaching -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- My script -->
+    <!-- Google Charts attaching -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- My scripts -->
     <script src="scripts.js"></script>
+    <script src="gcharts.js"></script>
     <title>Dashboard</title>
 </head>
 <body style="overflow: auto">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      //google.charts.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart(values) {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows(values);
-
-        // Set chart options
-        var options = {'title':'Количество запросов из стран',
-                       'width':600,
-                       'height':500};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
 <div class="container-fluid" style="margin:0; padding: 0;">
   <div class="row" style='height: 75px; background-color: blue;'>
     <div class="col-sm-6" style="margin: 0 0 0 5;color: white; font-size: 3em">
@@ -60,22 +31,26 @@
       
     </div>
   </div>
-  <div id='mainArea' class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="row">
+        <nav id='sidebar_menu' class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
                   <a href="#" class="nav-link" onclick='getMostFrequentCountry()'>Статистика по странам</a>
               </li>
               <li class="nav-item"><a href="#" class="nav-link" onclick='getMostFrequentCountryByCategory()'>Статистика по странам в категориях</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Статистика по времени суток</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Статистика по часам</a></li>
+              <li class="nav-item"><a href="#" class="nav-link" onclick='getFrequencyByTimeOfDay()'>Статистика по времени суток</a></li>
+              <li class="nav-item"><a href="#" class="nav-link" onclick='getLoadByHour()'>Статистика по часам</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Статистика по совместным категориям</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Статистика по брошенным корзинам</a></li>
               <li class="nav-item"><a href="#" class="nav-link">Статистика по повторным покупкам</a></li>
+              <li class="nav-item"><a href="#" class="nav-link" onclick='createGrid()'>Тестовая страница</a></li>
             </ul>
           </div>
         </nav>
+        <div id='mainArea' class="col-sm">
+
+        </div>
   </div>
 </div>
 </body>

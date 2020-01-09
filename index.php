@@ -2,6 +2,11 @@
 require_once('vendor\autoload.php');
 require_once('tools\db_process.php');
 
+/*mysqli_query($link, "TRUNCATE TABLE exploring");
+mysqli_query($link, "TRUNCATE TABLE cart");
+mysqli_query($link, "TRUNCATE TABLE payments");
+die();*/
+
 use ipinfo\ipinfo\IPinfo;
 
 $access_token = '3f4f1952ed1478';
@@ -38,7 +43,8 @@ class LogLine{
     public $type; //There are few types of logs: Just scrolling site, api calls for cart and pay methods
     function __construct($logLine) {
         $this->date = $logLine[0];
-        $this->time = $logLine[1];
+        $this->time = substr($logLine[1], 0, 2).":00:00";
+        //echo substr($logLine[1], 0, 2).":00:00<br>";
         $this->secret = $logLine[2];
         $this->ip = $logLine[4];
         $this->url = $logLine[5];
@@ -96,7 +102,7 @@ function parseLogLine($line){
     return $parsedLogLine = explode(' ', $trimLine);
 }
 function loadLogsFile(){
-    $file = fopen("C:\Users\artki\Desktop\logs2.txt", "r") or die("Unable to open file!");
+    $file = fopen("C:\OSPanel\domains\itis.upgrade\logs3.txt", "r") or die("Unable to open file!");
     return $file;
 }
 $logsFile = loadLogsFile();
@@ -108,7 +114,7 @@ while(!feof($logsFile)){
     //echo $resArray[4]. "<br>";
     //echo $line."<br>";
 }
-/*foreach($LL as $value){
+foreach($LL as $value){
     if(isIpPresent($link, $value->ip)){
 
     }
@@ -117,7 +123,7 @@ while(!feof($logsFile)){
         $country = $details->country_name;
         mysqli_query($link, "INSERT INTO IP_Country (country, ip) VALUES ('".$country."','".$value->ip."')");
     }
-}*/
+}
 //echo isIpPresent($link,"f");
 
 function getCountryNameByIP($ip){
@@ -168,13 +174,12 @@ foreach($LL as $value){
         $user_id = $params['user_id'];
         $cart_id = $params['cart_id'];
         $query = "INSERT INTO payments (action_time, cart_id, user_id) VALUES ('".$action_time."', '".$cart_id."', '".$user_id."')";
-        echo $query;
+        $query2 = "UPDATE cart SET paid=1 WHERE cart_id=$cart_id";
+        //echo $query;
         mysqli_query($link, $query);
+        mysqli_query($link, $query2);
     }
 }
-/*mysqli_query($link, "TRUNCATE TABLE exploring");
-mysqli_query($link, "TRUNCATE TABLE cart");
-mysqli_query($link, "TRUNCATE TABLE payments");*/
 //mysqli_query($link, "INSERT INTO IP_Country (country, ip) VALUES ('".$country."','".$ip."')");
 
 ?>
