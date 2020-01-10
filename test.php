@@ -15,8 +15,14 @@ function getURLType($url){
         return 'Scrolling';
     }
 }
+function testSubstr(){
+    $str = $_POST['url'];
+    echo substr($str,0,7).'<br>';
+    echo substr($str,strlen($str)-4, 4);
+}
+testSubstr();
 $ex_url = explode('/', $_POST['url']);
-        var_dump($ex_url);
+        //var_dump($ex_url);
 //echo getURLType($_POST['url']);
 ?>
 

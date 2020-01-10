@@ -1,11 +1,10 @@
 <?php
 
 $dbHost = "127.0.0.1";
-$dbName = "alltothebottom";
 $dbUser = "root";
 $dbPassword = "";
 
-$link = mysqli_connect($dbHost, $dbUser, $dbPassword, $dbName);
+$link = mysqli_connect($dbHost, $dbUser, $dbPassword);
 if(!$link){
     echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
     echo "Код ошибки errno: " . mysqli_connect_errno() . PHP_EOL;
