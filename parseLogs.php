@@ -9,10 +9,8 @@ use ipinfo\ipinfo\IPinfo;
 
 $access_token = '3f4f1952ed1478';
 $client = new IPinfo($access_token);
+$logsFilePath = "logs.txt";
 
-/*echo $details->city;
-echo $details->lan;
-echo $details->loc;*/
 
 
 class URL_String{
@@ -26,7 +24,6 @@ class URL_String{
         $this->domain_name = $ex_url[2];
         if($ex_url[3]!='') $this->category = $ex_url[3];
         if($ex_url[4]!='') $this->goods_name = $ex_url[4];
-        //var_dump($ex_url);
     }
 }
 
@@ -98,7 +95,7 @@ function parseLogLine($line){
     return $parsedLogLine = explode(' ', $trimLine);
 }
 function loadLogsFile(){
-    $file = fopen("C:\OSPanel\domains\itis.upgrade\logs.txt", "r") or die("Unable to open file!");
+    $file = fopen($logsFilePath, "r") or die("Unable to open file!");
     return $file;
 }
 $logsFile = loadLogsFile();
